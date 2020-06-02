@@ -16,15 +16,16 @@ function App() {
   if(!user.isNull) return (
     <div>
       <img alt="Profile" height={user.picture.data.height} width={user.picture.data.width} src={user.picture.data.url} />
-      <p>name: {user.name}</p>
-      <p>name: {user.email}</p>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
       <button onClick={() => setUser((oldUser) => {return {isNull: true}})}>Logout</button>
     </div>
   )
+
   return (
     <div className="App">
       <FacebookLogin
-        appId={process.env.FB_APP_ID}
+        appId={process.env.REACT_APP_FB_APP_ID}
         autoLoad={true}
         fields="name,email,picture"
         // onClick={componentClicked}
