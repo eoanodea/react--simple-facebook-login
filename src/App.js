@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FacebookLogin from 'react-facebook-login';
+
+
 
 function App() {
+  const [user, setUser] = useState({isNull: true})
+
+  const responseFacebook = (response) => {
+    console.log(response);
+    setUser((oldUser) => {
+      return response
+    })
+  }
+
+  if(!user.isNull) return (
+    <div>
+      <img alt="Profile" height={user.picture.data.height} width={user.picture.data.width} src={user.picture.data.url} />
+      <p>name: {user.name}</p>
+      <p>name: {user.email}</p>
+      <button onClick={() => setUser((oldUser) => {return {isNull: true}})}>Logout</button>
+    </div>
+  )
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FacebookLogin
+        appId="3053316611428048"
+        autoLoad={true}
+        fields="name,email,picture"
+        // onClick={componentClicked}
+        callback={responseFacebook} />
     </div>
   );
 }
