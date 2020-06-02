@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <FacebookLogin
-        appId="3053316611428048"
+        appId={process.env.FB_APP_ID}
         autoLoad={true}
         fields="name,email,picture"
         // onClick={componentClicked}
